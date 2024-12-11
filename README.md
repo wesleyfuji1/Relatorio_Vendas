@@ -9,3 +9,5 @@ Entre eles, estão: - Vendas por modelo (separação de modelos vendidos por qua
 Além disso, interpreta também outra planilha, específica do consórcio, separando modelos mais vendidos.
 
 Ainda quero implementar nesse código, relatórios gráficos com cidades mais alcançadas, motos mais vendidas por cidade, e evolução de vendas semanal.
+
+A planilha original está armazenada no OneDrive.
