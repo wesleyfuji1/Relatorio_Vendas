@@ -40,17 +40,26 @@ if 'Data' in vendas_df.columns:
     # Converter a coluna 'Data' para o formato de data
     vendas_df['Data'] = pd.to_datetime(vendas_df['Data'], dayfirst=True)
 
-    # Criar a coluna de número da semana
-    vendas_df['Semana'] = vendas_df['Data'].dt.isocalendar().week
+    # Agrupar os dados por mês e contar as vendas
+    vendas_por_mes = vendas_df.groupby(vendas_df['Data'].dt.month).size()
 
-    # Evolução semanal das vendas
-    vendas_por_semana = vendas_df.groupby('Semana').size()
-    print("\nEvolução semanal:\n", vendas_por_semana)
-
-    # Gerar gráfico de linha para evolução semanal
-    vendas_por_semana.plot(kind='line', marker='o', title="Evolução Semanal das Vendas", color='green')
-    plt.xlabel("Semana")
+    # Criar o gráfico de barras
+    plt.figure(figsize=(12, 6))
+    plt.bar(vendas_por_mes.index, vendas_por_mes.values, color='purple', edgecolor='black')
+    plt.xlabel("Mês")
     plt.ylabel("Quantidade Vendida")
+    plt.title("Evolução Mensal das Vendas")
+    plt.xticks(ticks=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+               labels=['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'])
+
+    # Definir os limites e os valores do eixo X
+    plt.xlim(1, 12)  # Ajusta o limite do eixo x para mostrar todos os meses
+
+    # Definir os limites e os valores do eixo y
+    plt.ylim(1, 15)  # Limita o eixo y de 1 a 15
+    plt.yticks(range(1, 16))  # Define os valores inteiros de 1 a 15 no eixo y
+
+    plt.grid(axis='y')
     plt.tight_layout()
     plt.show()
 else:
